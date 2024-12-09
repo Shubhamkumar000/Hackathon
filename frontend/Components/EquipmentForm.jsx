@@ -9,8 +9,9 @@ const EquipmentForm = () => {
     contact: "",
     picture: "", // Picture URL field
     category: "equipment", // Default category as equipment
-    username: localStorage.getItem("user") , // Username (assumed to be an ObjectId)
+    username: localStorage.getItem("username") , // Username (assumed to be an ObjectId)
   });
+  // console.log(localStorage.getItem("username"));
 
   const [isLoading, setIsLoading] = useState(false);
 

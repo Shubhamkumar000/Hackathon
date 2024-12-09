@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+// import './AdminPart.css';
 
 const AdminLogin = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });

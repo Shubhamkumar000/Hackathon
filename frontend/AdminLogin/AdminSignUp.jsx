@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+// import './AdminPart.css';
 
 const AdminSignup = () => {
   const [formData, setFormData] = useState({
@@ -68,9 +69,11 @@ const AdminSignup = () => {
       <h1>Admin Sign Up</h1>
       <form onSubmit={handleSubmit}>
         <div>
+          <label htmlFor="name">Name</label>
           <input
             type="text"
             name="name"
+            id="name"
             value={formData.name}
             onChange={handleInputChange}
             placeholder="Enter your name"
@@ -78,9 +81,11 @@ const AdminSignup = () => {
           />
         </div>
         <div>
+          <label htmlFor="username">Username</label>
           <input
             type="text"
             name="username"
+            id="username"
             value={formData.username}
             onChange={handleInputChange}
             placeholder="Enter your username"
@@ -88,9 +93,11 @@ const AdminSignup = () => {
           />
         </div>
         <div>
+          <label htmlFor="email">Email</label>
           <input
             type="email"
             name="email"
+            id="email"
             value={formData.email}
             onChange={handleInputChange}
             placeholder="Enter your email"
@@ -98,9 +105,11 @@ const AdminSignup = () => {
           />
         </div>
         <div>
+          <label htmlFor="password">Password</label>
           <input
             type="password"
             name="password"
+            id="password"
             value={formData.password}
             onChange={handleInputChange}
             placeholder="Enter your password"
@@ -108,9 +117,11 @@ const AdminSignup = () => {
           />
         </div>
         <div>
+          <label htmlFor="address">Address</label>
           <input
             type="text"
             name="address"
+            id="address"
             value={formData.address}
             onChange={handleInputChange}
             placeholder="Enter your address"
@@ -118,9 +129,11 @@ const AdminSignup = () => {
           />
         </div>
         <div>
+          <label htmlFor="contact">Contact Number</label>
           <input
             type="text"
             name="contact"
+            id="contact"
             value={formData.contact}
             onChange={handleInputChange}
             placeholder="Enter your contact number"
@@ -128,9 +141,11 @@ const AdminSignup = () => {
           />
         </div>
         <div>
+          <label htmlFor="pincode">Pincode</label>
           <input
             type="text"
             name="pincode"
+            id="pincode"
             value={formData.pincode}
             onChange={handleInputChange}
             placeholder="Enter your pincode"
