@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import './AdminDashboard.css';
 
 const AdminDashboard = () => {
   const [equipmentData, setEquipmentData] = useState([]);
@@ -37,6 +38,7 @@ const AdminDashboard = () => {
     fetchData();
   }, [id]);
 
+  // Function to modify the quantity on the server
   const modify = async ({ equipment, equipmentQuantity }) => {
     try {
       const serviceId = equipment._id;
@@ -44,18 +46,25 @@ const AdminDashboard = () => {
         `https://xnv54w0n-8080.inc1.devtunnels.ms/api/services/${serviceId}`,
         { quantity: Number(equipmentQuantity) }
       );
-      console.log("quantity changed");
+      if (response.status === 200) {
+        console.log("Quantity updated successfully!");
+      } else {
+        console.log("Error updating quantity:", response.status);
+      }
     } catch (err) {
-      console.log("quantity got error");
+      console.log("Error while modifying quantity:", err);
     }
   };
 
+  // Handle input change for quantity
   const handleQuantityChange = (e, equipmentId) => {
     const value = e.target.value;
-    setQuantities({
-      ...quantities,
-      [equipmentId]: value, // Update the quantity for the specific equipment
-    });
+    if (value >= 0) { // Ensure the value is a positive number
+      setQuantities((prevQuantities) => ({
+        ...prevQuantities,
+        [equipmentId]: value, // Update the quantity for the specific equipment
+      }));
+    }
   };
 
   if (loading) {
@@ -77,39 +86,21 @@ const AdminDashboard = () => {
   return (
     <div className="main-page" style={{ padding: "20px", textAlign: "center" }}>
       <h1>Available Equipment and Medicines</h1>
-      <div
-        className="cards-container"
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "center",
-        }}
-      >
+      <div className="cards-container">
         {Array.isArray(equipmentData) &&
           equipmentData.map((equipment) => {
             const imageUrl = equipment.picture
               ? `${equipment.picture}`
               : "https://via.placeholder.com/150";
             const equipmentQuantity = quantities[equipment._id] || equipment.quantity; // Get the quantity or default to existing
+            const isShortage = equipmentQuantity < 10; // Check if there's a shortage
 
             return (
-              <div
-                className="equipment-card"
-                key={equipment._id}
-                style={{
-                  width: "200px",
-                  margin: "20px",
-                  borderRadius: "8px",
-                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                  overflow: "hidden",
-                  textAlign: "center",
-                }}
-              >
+              <div className="equipment-card" key={equipment._id}>
                 <img
                   src={imageUrl}
                   alt={equipment.name}
                   onError={(e) => (e.target.src = "https://via.placeholder.com/150")}
-                  style={{ width: "100%", height: "150px", objectFit: "cover" }}
                 />
                 <div style={{ padding: "10px" }}>
                   <h3>{equipment.name}</h3>
@@ -118,14 +109,22 @@ const AdminDashboard = () => {
                   <p>Location: {equipment.username.address}</p>
                   <p>Contact: {equipment.username.contact}</p>
                   <p>Category: {equipment.category}</p>
+
+                  {/* Conditionally render the shortage alert if quantity is less than 10 */}
+                  {isShortage && (
+                    <p className="shortage-alert">
+                      Shortage Alert!
+                    </p>
+                  )}
+
                   <input
                     placeholder="Enter Quantity"
                     type="number"
-                    value={equipmentQuantity}
+                    value={quantities[equipment._id] || equipment.quantity}
                     onChange={(e) => handleQuantityChange(e, equipment._id)} // Update quantity for each equipment
                   />
                   <button
-                    onClick={() => modify({ equipment, equipmentQuantity })}
+                    onClick={() => modify({ equipment, equipmentQuantity: quantities[equipment._id] || equipment.quantity })}
                   >
                     Change
                   </button>
@@ -136,16 +135,7 @@ const AdminDashboard = () => {
       </div>
       <button
         onClick={() => (window.location.href = "/add-equipment")}
-        style={{
-          marginTop: "20px",
-          padding: "10px 20px",
-          fontSize: "16px",
-          backgroundColor: "#007BFF",
-          color: "white",
-          border: "none",
-          borderRadius: "5px",
-          cursor: "pointer",
-        }}
+        className="add-equipment-button"
       >
         Add Equipment
       </button>
