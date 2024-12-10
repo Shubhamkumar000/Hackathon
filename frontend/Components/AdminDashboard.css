@@ -1,10 +1,14 @@
-/* AdminDashboard.css */
-
 /* General Layout for the Page */
-.main-page {
+body {
+    background-color: #f7f7f7; /* Light Gray Background */
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .main-page {
     padding: 20px;
     text-align: center;
-    font-family: 'Arial', sans-serif;
   }
   
   /* Card Container for Flexbox layout */
@@ -18,7 +22,7 @@
   
   /* Equipment Card Styling */
   .equipment-card {
-    width: 220px;
+    width: 280px;
     margin: 0;
     border-radius: 10px;
     overflow: hidden;
@@ -53,13 +57,13 @@
   
   .equipment-card p {
     font-size: 14px;
-    color: #555;
+    /* color: #555; */
     margin: 5px 0;
   }
   
   /* Shortage Alert Styling */
   .shortage-alert {
-    color: red;
+    color: rgb(217, 23, 23);
     font-weight: bold;
     margin-top: 10px;
     font-size: 16px;

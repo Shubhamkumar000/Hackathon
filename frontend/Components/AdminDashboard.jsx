@@ -105,7 +105,7 @@ const AdminDashboard = () => {
                 <div style={{ padding: "10px" }}>
                   <h3>{equipment.name}</h3>
                   <p>Quantity: {equipment.quantity}</p>
-                  <p>Price: ${equipment.price}</p>
+                  <p>Price: ₹{equipment.price}</p>
                   <p>Location: {equipment.username.address}</p>
                   <p>Contact: {equipment.username.contact}</p>
                   <p>Category: {equipment.category}</p>

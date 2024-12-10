@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+
 const UserLogin = () => {
   const [credentials, setCredentials] = useState({
     username: "",
@@ -21,7 +22,7 @@ const UserLogin = () => {
       const response = await axios.post("https://xnv54w0n-8080.inc1.devtunnels.ms/api/login/people", credentials);
       if (response.data.success) {
         alert("Login successful!");
-        navigate("/dashboard"); // Redirect to user dashboard
+        navigate("/"); // Redirect to user dashboard
       } else {
         alert(response.data.message || "Invalid credentials.");
       }
